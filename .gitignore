@@ -1,0 +1,13 @@
+.DS_Store
+*.dSYM
+*.swp
+*.o
+*.zip
+*gch
+*xcode*
+build*
+a.out
+build/*
+minishell
+libft.a
+tests/*

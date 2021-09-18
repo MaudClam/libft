@@ -8,6 +8,8 @@
 
 /* Begin PBXFileReference section */
 		66A76D6826F6951700FE5348 /* liblibft.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibft.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		66A76D7126F697C600FE5348 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.make; };
+		66A76D7226F69C8F00FE5348 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,7 +26,11 @@
 		66A76D5F26F6951700FE5348 = {
 			isa = PBXGroup;
 			children = (
+				66A76D7126F697C600FE5348 /* .gitignore */,
+				66A76D7226F69C8F00FE5348 /* Makefile */,
+				66A76D7026F696EF00FE5348 /* libft */,
 				66A76D6926F6951700FE5348 /* Products */,
+				66A76D7326F69D0A00FE5348 /* tests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -34,6 +40,20 @@
 				66A76D6826F6951700FE5348 /* liblibft.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		66A76D7026F696EF00FE5348 /* libft */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = libft;
+			sourceTree = "<group>";
+		};
+		66A76D7326F69D0A00FE5348 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
