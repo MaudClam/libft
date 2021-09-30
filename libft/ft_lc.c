@@ -12,7 +12,23 @@
 
 #include "libft.h"
 
-static int	lc_freeone(t_lc *lc, char mode)
+/*
+** Function void *lc(void *ptr) takes a pointer created with malloc(3),
+** writes it to the pointer table, and frees that memory when needed.
+** Returned value: the received pointer. NULL if the parameters are NULL,
+** (void *)1 or (void *)-1.
+** Parameter: pointer or NULL or (void *)1 or (void *)-1.
+** Function actions:
+** 1.If the parameter is a pointer, it is written to the pointer table.
+** 2.If the parameter is NULL, all memory pointed to by pointers from the table
+**   is freed along with the memory occupied by the table.
+** 3.If the parameter is (void *)-1, a flag is set in the table of pointers
+**   opposite the last pointer.
+** 4.If the parameter is (void *)1, the memory will be freed
+**   only up to the nearest pointer with a flag in the reverse order
+**   of pointers entering the table.
+*/
+static int	lc_freeone(t_lc *lc, int mode)
 {
 	t_lc	*l;
 
@@ -31,7 +47,7 @@ static int	lc_freeone(t_lc *lc, char mode)
 	return (!(l->flag && mode));
 }
 
-static void	lc_freemem(t_lc *lc, char mode)
+static void	lc_freemem(t_lc *lc, int mode)
 {
 	int	delone_result;
 

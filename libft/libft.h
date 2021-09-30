@@ -19,7 +19,7 @@
 # include <stdint.h>
 
 # define FREE_TO_FIX	(void *)1
-# define FREE_ALL	NULL
+# define FREE_ALL		NULL
 # define FIX_POINTER	(void *)-1
 
 typedef struct s_list	t_list;

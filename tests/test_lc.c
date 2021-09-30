@@ -14,7 +14,7 @@
 
 int main(void)
 {
-	static void	*ptr[1000];
+	static void	*ptr[1024];
 	int			i = 0;
 	int			k = 1024;
 	
@@ -33,7 +33,7 @@ int main(void)
 	i = 0;
 	while (i < k)
 	{
-		ptr[i] = malloc(i * k);
+		ptr[i] = lc(malloc(i * k));
 		if (!ptr[i])
 		{
 			ft_errmsg("malloc[0] error in main()", errno);
@@ -42,7 +42,7 @@ int main(void)
 		i++;
 	}
 	lc(FREE_TO_FIX);
-	lc(FREE_TO_FIX);
+	lc(FREE_ALL);
 	sleep (1);
 	exit(0);
 }
