@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <errno.h>
+# include <stdint.h>
 
 # define FREE_TO_FIX	(void *)1
 # define FREE_ALL	NULL

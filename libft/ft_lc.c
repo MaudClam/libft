@@ -80,9 +80,9 @@ void	*lc(void *ptr)
 	static t_lc	lc;
 
 	if (ptr == FREE_ALL)
-		lc_freemem(&lc, (char)FREE_ALL);
+		lc_freemem(&lc, (uintptr_t)FREE_ALL);
 	else if (ptr == FREE_TO_FIX)
-		lc_freemem(&lc, (char)FREE_TO_FIX);
+		lc_freemem(&lc, (uintptr_t)FREE_TO_FIX);
 	else if (ptr == FIX_POINTER)
 		lc_fix(&lc);
 	else
