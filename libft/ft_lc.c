@@ -49,11 +49,11 @@ static int	lc_freeone(t_lc *lc, int mode)
 
 static void	lc_freemem(t_lc *lc, int mode)
 {
-	int	delone_result;
+	int	freeone_result;
 
-	delone_result = 1;
-	while (delone_result)
-		delone_result = lc_freeone(lc, mode);
+	freeone_result = 1;
+	while (freeone_result)
+		freeone_result = lc_freeone(lc, mode);
 }
 
 static void	lc_newptr(t_lc *lc, void *ptr)
