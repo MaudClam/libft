@@ -17,6 +17,7 @@
 # include <limits.h>
 # include <errno.h>
 # include <stdint.h>
+#include <stdio.h>//
 
 # define FREE_TO_FIX	(void *)1
 # define FREE_ALL		NULL
@@ -27,6 +28,12 @@ typedef struct s_lc		t_lc;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
+int		ft_isalnum(int c);
+int		ft_isalpha(int c);
+int		ft_isascii(int c);
+int		ft_isdigit(int c);
+int		ft_isinset(const char c, const char *set);
+int		ft_isprint(int c);
 int		ft_isspace(char c);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putnbr_fd(int n, int fd);
@@ -56,5 +63,6 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
+char	**ft_splitset_lc(char const *s, char const *set);
 
 #endif

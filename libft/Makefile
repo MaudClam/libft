@@ -14,21 +14,14 @@ NAME =		libft.a
 
 SRCS =		ft_atoi.c \
 			ft_bzero.c \
-			ft_isspace.c \
-			ft_putchar_fd.c \
-			ft_putnbr_fd.c \
-			ft_putstr_fd.c \
+			ft_is_functions.c \
+			ft_is_functions1.c \
+			ft_put_functions.c \
 			ft_strlen.c \
 			ft_errmsg.c \
 			ft_lc.c \
-			ft_lstadd_back.c \
-			ft_lstadd_front.c \
-			ft_lstclear.c \
-			ft_lstdelone.c \
-			ft_lstiter.c \
-			ft_lstmap.c \
-			ft_lstnew.c \
-			ft_lstsize.c
+			ft_lst_functions.c \
+			ft_lst_functions1.c \
 
 OBJS =		$(SRCS:.c=.o)
 

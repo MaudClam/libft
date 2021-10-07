@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   test_ft_splitset_lc.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mclam <mclam@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/19 04:38:03 by mclam             #+#    #+#             */
-/*   Updated: 2021/09/19 04:38:03 by mclam            ###   ########.fr       */
+/*   Created: 2021/10/06 20:09:30 by mclam             #+#    #+#             */
+/*   Updated: 2021/10/06 20:09:30 by mclam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft/libft.h"
+#include <stdio.h>
 
-/*
-** Iterates the list ’lst’ and applies the function ’f’ to the content
-** of each element.
-** Parameter1. The adress of a pointer to an element.
-** Parameter2. The adress of the function used to iterate on the list.
-*/
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+int	main()
 {
-	t_list	*tmp;
-
-	if (!lst || !f)
-		return ;
-	tmp = lst;
-	while (tmp)
+	char 	*s = "   1!2; 3 456 ";
+	char	**split;
+	int		i = 0;
+	
+	split = ft_splitset_lc(s, " !,;");
+	while (split[i])
 	{
-		f(tmp->content);
-		tmp = tmp->next;
+		printf("%s %lu\n", split[i], ft_strlen(s));
+		i++;
 	}
+//	write(1, split, ft_strlen(s));
+	lc(NULL);
+	return (0);
 }

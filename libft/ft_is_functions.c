@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_is_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mclam <mclam@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/19 02:22:30 by mclam             #+#    #+#             */
-/*   Updated: 2021/09/19 02:22:30 by mclam            ###   ########.fr       */
+/*   Created: 2021/10/01 12:59:32 by mclam             #+#    #+#             */
+/*   Updated: 2021/10/01 12:59:32 by mclam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** Adds the element ’new’ at the beginning of the list.
-** Parametr1: The address of a pointer to the first link of a list.
-** Parametr2: The address of a pointer to the element to be added to the list.
-*/
-void	ft_lstadd_front(t_list **lst, t_list *new)
+int	ft_isalnum(int c)
 {
-	if (!new)
-		return ;
-	new->next = *lst;
-	*lst = new;
+	return (ft_isalpha(c) || ft_isdigit(c));
+}
+
+int	ft_isalpha(int c)
+{
+	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
+}
+
+int	ft_isascii(int c)
+{
+	return (c >= 0 && c < 128);
+}
+
+int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+int	ft_isprint(int c)
+{
+	return (c >= 32 && c <= 126);
 }

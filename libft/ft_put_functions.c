@@ -1,17 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mclam <mclam@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/29 19:48:09 by mclam             #+#    #+#             */
-/*   Updated: 2021/09/29 19:48:09 by mclam            ###   ########.fr       */
+/*   Created: 2021/09/29 19:38:57 by mclam             #+#    #+#             */
+/*   Updated: 2021/09/29 19:38:57 by mclam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (!s)
+		return ;
+	write(fd, s, ft_strlen(s));
+}
+
+/*
+** Start ft_putnbr_fd() function
+*/
 static int	spec_cond(int nb, int fd)
 {
 	if (nb == -2147483648)
@@ -47,3 +62,6 @@ void	ft_putnbr_fd(int n, int fd)
 		dgts = dgts / 10;
 	}
 }
+/*
+** End ft_putnbr_fd() function
+*/

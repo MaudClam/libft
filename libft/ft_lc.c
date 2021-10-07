@@ -15,18 +15,25 @@
 /*
 ** Function void *lc(void *ptr) takes a pointer created with malloc(3),
 ** writes it to the pointer table, and frees that memory when needed.
-** Returned value: the received pointer. NULL if the parameters are NULL,
-** (void *)1 or (void *)-1.
+** Returned value: the received pointer. NULL if the parameter are NULL,
+** (void *)1, (void *)-1, or if the memory allocation for an element
+** of the pointer table is denied.
 ** Parameter: pointer or NULL or (void *)1 or (void *)-1.
 ** Function actions:
 ** 1.If the parameter is a pointer, it is written to the pointer table.
-** 2.If the parameter is NULL, all memory pointed to by pointers from the table
-**   is freed along with the memory occupied by the table.
+** 2.If the parameter is NULL, all memory pointed to by pointers from
+**   the table is freed along with the memory occupied by the table.
 ** 3.If the parameter is (void *)-1, a flag is set in the table of pointers
 **   opposite the last pointer.
 ** 4.If the parameter is (void *)1, the memory will be freed
 **   only up to the nearest pointer with a flag in the reverse order
 **   of pointers entering the table.
+** 5.If memory allocation for the next element of the table of pointers
+**   is prohibited, all the memory pointed to by the pointers from the table
+**   is freed along with the memory occupied by the table and the function
+**   will return NULL and issue an error message "malloc error in lc()
+**   function" with the value errno. In this case, the memory pointed
+**   to by the pointer passed as a parameter will also be freed.
 */
 static int	lc_freeone(t_lc *lc, int mode)
 {
@@ -56,32 +63,35 @@ static void	lc_freemem(t_lc *lc, int mode)
 		freeone_result = lc_freeone(lc, mode);
 }
 
-static void	lc_newptr(t_lc *lc, void *ptr)
+static void	*lc_newptr(t_lc *lc, void *ptr)
 {
 	t_lc	*l;
 
 	l = lc;
-	if (!l->ptr)
+	if (l->ptr)
 	{
-		l->ptr = ptr;
-		return ;
-	}
-	while (l->next)
-		l = l->next;
-	l->next = malloc(sizeof(t_lc));
-	if (!l->next)
-	{
-		ft_errmsg("malloc error in lc() function", errno);
-		lc_freemem(lc, 0);
+		while (l->next)
+			l = l->next;
+		l->next = malloc(sizeof(t_lc));
+		if (l->next)
+		{
+			ft_bzero(l->next, sizeof(t_lc));
+			l->next->ptr = ptr;
+		}
+		else
+		{
+			ft_errmsg("malloc error in lc() function", errno);
+			lc_freemem(lc, (uintptr_t)FREE_ALL);
+			free(ptr);
+			ptr = NULL;
+		}
 	}
 	else
-	{
-		ft_bzero(l->next, sizeof(t_lc));
-		l->next->ptr = ptr;
-	}
+		l->ptr = ptr;
+	return (ptr);
 }
 
-static void	lc_fix(t_lc *lc)
+static void	lc_fixptr(t_lc *lc)
 {
 	t_lc	*l;
 
@@ -100,11 +110,8 @@ void	*lc(void *ptr)
 	else if (ptr == FREE_TO_FIX)
 		lc_freemem(&lc, (uintptr_t)FREE_TO_FIX);
 	else if (ptr == FIX_POINTER)
-		lc_fix(&lc);
+		lc_fixptr(&lc);
 	else
-	{
-		lc_newptr(&lc, ptr);
-		return (ptr);
-	}
+		return (lc_newptr(&lc, ptr));
 	return (NULL);
 }
