@@ -15,17 +15,73 @@
 
 int	main()
 {
-	char 	*s = "   1!2; 3 456 ";
 	char	**split;
-	int		i = 0;
+	int		i;
 	
-	split = ft_splitset_lc(s, " !,;");
+	printf("ft_splitset_lc('', '')\n");
+	split = ft_splitset_lc("", "");
+	i = 0;
 	while (split[i])
 	{
-		printf("%s %lu\n", split[i], ft_strlen(s));
+		printf("%s\n", split[i]);
 		i++;
 	}
-//	write(1, split, ft_strlen(s));
+	printf("========================\n\n");
+	printf("ft_splitset_lc('', NULL)\n");
+	split = ft_splitset_lc("", NULL);
+	i = 0;
+	while (split[i])
+	{
+		printf("%s\n", split[i]);
+		i++;
+	}
+	printf("========================\n\n");
+	printf("ft_splitset_lc(NULL, '')\n");
+	split = ft_splitset_lc(NULL, "");
+	i = 0;
+	while (split[i])
+	{
+		printf("%s\n", split[i]);
+		i++;
+	}
+	printf("========================\n\n");
+	printf("ft_splitset_lc(NULL, NULL)\n");
+	split = ft_splitset_lc(NULL, NULL);
+	i = 0;
+	while (split[i])
+	{
+		printf("%s\n", split[i]);
+		i++;
+	}
+	printf("========================\n\n");
+	printf("ft_splitset_lc(NULL, '! ;-')\n");
+	split = ft_splitset_lc(NULL, "! ;-");
+	i = 0;
+	while (split[i])
+	{
+		printf("%s\n", split[i]);
+		i++;
+	}
+	printf("========================\n\n");
+	printf("ft_splitset_lc('! ;-', NULL)\n");
+	split = ft_splitset_lc("! ;-", NULL);
+	i = 0;
+	while (split[i])
+	{
+		printf("%s\n", split[i]);
+		i++;
+	}
+	printf("========================\n\n");
+	printf("ft_splitset_lc(' !;   !!123!456  !78asd  !!!!!', ' !;')\n");
+	split = ft_splitset_lc(" !;   !!123!456  !78asd  !!!!!", " !;");
+	i = 0;
+	while (split[i])
+	{
+		printf("%s\n", split[i]);
+		i++;
+	}
+	printf("========================\n\n");
 	lc(NULL);
 	return (0);
 }
+//gcc -Wall -Wextra -Werror test_ft_splitset_lc.c -L../libft -lft -I../libft

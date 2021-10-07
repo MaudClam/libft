@@ -35,6 +35,7 @@ int		ft_isdigit(int c);
 int		ft_isinset(const char c, const char *set);
 int		ft_isprint(int c);
 int		ft_isspace(char c);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
@@ -64,5 +65,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
 char	**ft_splitset_lc(char const *s, char const *set);
+char	*ft_strdup(const char *s1);
 
 #endif

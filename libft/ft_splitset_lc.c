@@ -22,90 +22,57 @@
 ** Return value: The array of new strings resulting from the split. NULL if
 ** the allocation fails.
 */
-static char	*fill_str(char const *s, char const *set, char *str)
+static size_t	word_counter(char const *s, char const *set)
 {
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while (ft_isinset(s[i], set))
-		i++;
-	while (s[i])
-	{
-		if (!ft_isinset(s[i], set))
-			str[j++] = s[i++];
-		else
-		{
-			str[j++] = '\0';
-			while (ft_isinset(s[i], set))
-				i++;
-		}
-	}
-	str[j] = '\0';
-	return (str);
-}
-
-static int	split_counter(char const *s, char const *set, int *word_cnt)
-{
-	int		char_cnt;
+	size_t	word_cnt;
 	char	flag;
-	int		i;
+	size_t	i;
 
-	char_cnt = 0;
+	word_cnt = 0;
 	flag = 0;
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 	{
-		if (!ft_isinset(s[i], set))
+		if (ft_isinset(s[i], set))
+			flag = 0;
+		else
 		{
-			char_cnt++;
-			if (!flag)
+			if (flag == 0)
 			{
 				flag = 1;
-				*word_cnt += 1;
+				word_cnt++;
 			}
 		}
-		else
-			flag = 0;
 		i++;
 	}
-	return (char_cnt);
-}
-
-char	**fill_split(char *str, char **split, int word_cnt)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	split[j++] = &str[i];
-	while (j < word_cnt)
-	{
-		while (str[i])
-			i++;
-		i++;
-		split[j++] = &str[i++];
-	}
-	split[j] = NULL;
-	return (split);
+	return (word_cnt);
 }
 
 char	**ft_splitset_lc(char const *s, char const *set)
 {
-	int		word_cnt;
+	size_t	word_cnt;
 	char	*str;
 	char	**split;
+	size_t	i;
+	size_t	j;
 	
-	word_cnt = 0;
-	str = lc(malloc(split_counter(s, set, &word_cnt) + word_cnt + 1));
-	if (!str)
-		return (NULL);
-	str = fill_str(s, set, str);
+	word_cnt = word_counter(s, set);
+	str = ft_strdup(s);
 	split = lc(malloc(sizeof(char *) * (word_cnt + 1)));
 	if (!split)
 		return (NULL);
-	split = fill_split(str, split, word_cnt);
+	i = 0;
+	j = 0;
+	while (j < word_cnt)
+	{
+		while (str[i] && ft_isinset(str[i], set))
+			str[i++] = '\0';
+		split[j++] = &str[i];
+		while (str[i] && !ft_isinset(str[i], set))
+			i++;
+		while (str[i] && ft_isinset(str[i], set))
+			str[i++] = '\0';
+	}
+	split[word_cnt] = NULL;
 	return (split);
 }
