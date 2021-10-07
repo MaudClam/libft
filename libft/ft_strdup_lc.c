@@ -21,7 +21,7 @@
 ** issue an error message "malloc() error in ft_strlen() function" with the
 ** value errno and errno is set to ENOMEM.
 */
-char	*ft_strdup(const char *s1)
+char	*ft_strdup_lc(const char *s1)
 {
 	size_t	n;
 	char	*s2;

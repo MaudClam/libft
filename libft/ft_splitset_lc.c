@@ -75,7 +75,7 @@ char	**ft_splitset_lc(char const *s, char const *set)
 	char	**split;
 
 	word_cnt = word_counter(s, set);
-	str = ft_strdup(s);
+	str = ft_strdup_lc(s);
 	if (!str)
 		return (NULL);
 	split = lc(malloc(sizeof(char *) * (word_cnt + 1)));

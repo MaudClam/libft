@@ -28,6 +28,7 @@ typedef struct s_lc		t_lc;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
+int		ft_errmsg(char *str, int err);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
@@ -47,15 +48,6 @@ struct					s_list
 	struct s_list		*next;
 };
 
-struct s_lc
-{
-	char				flag;
-	void				*ptr;
-	struct s_lc			*next;
-};
-
-int		ft_errmsg(char *str, int err);
-void	*lc(void *ptr);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
@@ -64,7 +56,16 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
+
+struct s_lc
+{
+	char				flag;
+	void				*ptr;
+	struct s_lc			*next;
+};
+
+void	*lc(void *ptr);
 char	**ft_splitset_lc(char const *s, char const *set);
-char	*ft_strdup(const char *s1);
+char	*ft_strdup_lc(const char *s1);
 
 #endif
