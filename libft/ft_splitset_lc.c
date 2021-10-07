@@ -48,19 +48,11 @@ static size_t	word_counter(char const *s, char const *set)
 	return (word_cnt);
 }
 
-char	**ft_splitset_lc(char const *s, char const *set)
+static void	splitter(char **split, char *str, char const *set, size_t word_cnt)
 {
-	size_t	word_cnt;
-	char	*str;
-	char	**split;
 	size_t	i;
 	size_t	j;
 
-	word_cnt = word_counter(s, set);
-	str = ft_strdup(s);
-	split = lc(malloc(sizeof(char *) * (word_cnt + 1)));
-	if (!split)
-		return (NULL);
 	i = 0;
 	j = 0;
 	while (j < word_cnt)
@@ -74,5 +66,25 @@ char	**ft_splitset_lc(char const *s, char const *set)
 			str[i++] = '\0';
 	}
 	split[word_cnt] = NULL;
+}
+
+char	**ft_splitset_lc(char const *s, char const *set)
+{
+	size_t	word_cnt;
+	char	*str;
+	char	**split;
+
+	word_cnt = word_counter(s, set);
+	str = ft_strdup(s);
+	if (!str)
+		return (NULL);
+	split = lc(malloc(sizeof(char *) * (word_cnt + 1)));
+	if (!split)
+	{
+		ft_errmsg("malloc() error in ft_splitset_lc() function", errno);
+		errno = ENOMEM;
+		return (NULL);
+	}
+	splitter(split, str, set, word_cnt);
 	return (split);
 }

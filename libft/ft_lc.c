@@ -30,10 +30,11 @@
 **   of pointers entering the table.
 ** 5.If memory allocation for the next element of the table of pointers
 **   is prohibited, all the memory pointed to by the pointers from the table
-**   is freed along with the memory occupied by the table and the function
-**   will return NULL and issue an error message "malloc error in lc()
-**   function" with the value errno. In this case, the memory pointed
-**   to by the pointer passed as a parameter will also be freed.
+**   is freed along with the memory occupied by the table, the function
+**   will return NULL, issue an error message "malloc() error in lc()
+**   function" with the value errno and errno is set to ENOMEM.
+**   In this case, the memory pointed to by the pointer passed as a parameter
+**   will also be freed.
 */
 static int	lc_freeone(t_lc *lc, int mode)
 {
@@ -80,10 +81,11 @@ static void	*lc_newptr(t_lc *lc, void *ptr)
 		}
 		else
 		{
-			ft_errmsg("malloc error in lc() function", errno);
+			ft_errmsg("malloc() error in lc() function", errno);
 			lc_freemem(lc, (uintptr_t)FREE_ALL);
 			free(ptr);
 			ptr = NULL;
+			errno = ENOMEM;
 		}
 	}
 	else
