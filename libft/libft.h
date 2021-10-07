@@ -22,6 +22,7 @@
 # define FREE_TO_FIX	(void *)1
 # define FREE_ALL		NULL
 # define FIX_POINTER	(void *)-1
+# define U_INT			unsigned int
 
 typedef struct s_list	t_list;
 typedef struct s_lc		t_lc;
@@ -36,7 +37,12 @@ int		ft_isdigit(int c);
 int		ft_isinset(const char c, const char *set);
 int		ft_isprint(int c);
 int		ft_isspace(char c);
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n);
+void	*ft_memchr(const void *s, int c, size_t n);
+int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+void	*ft_memmove(void *dst, const void *src, size_t len);
+void	*ft_memset(void *b, int c, size_t len);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
@@ -65,7 +71,16 @@ struct s_lc
 };
 
 void	*lc(void *ptr);
+char	*ft_itoa_lc(int n);
 char	**ft_splitset_lc(char const *s, char const *set);
 char	*ft_strdup_lc(const char *s1);
+void	*ft_calloc_lc(size_t count, size_t size);
+char	*ft_strjoin_lc(char const *s1, char const *s2);
+char	*ft_strtrim_lc(char const *s1, char const *set);
+char	*ft_indexname_lc(char const *name, int index, char const *extension);
+
+int		fii(char condition, int then, int otherwise_then);
+size_t	fis(char condition, size_t then, size_t otherwise_then);
+U_INT	fiu(char condition, U_INT then, U_INT otherwise_then);
 
 #endif

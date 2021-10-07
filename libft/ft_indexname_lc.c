@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_indexname_lc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mclam <mclam@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/29 19:36:13 by mclam             #+#    #+#             */
-/*   Updated: 2021/09/29 19:36:13 by mclam            ###   ########.fr       */
+/*   Created: 2021/10/07 23:04:03 by mclam             #+#    #+#             */
+/*   Updated: 2021/10/07 23:04:03 by mclam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** The function computes the length of the string s.
-** Return value: The number of characters that precede the terminating
-** NUL character.
-*/
-size_t	ft_strlen(const char *s)
+char	*ft_indexname_lc(char const *name, int index, char const *extension)
 {
-	size_t	len;
+	char	*str;
 
-	len = 0;
-	while (s && s[len])
-		len++;
-	return (len);
+	if (index < 1)
+		str = ft_strjoin_lc(name, extension);
+	else
+		str = ft_strjoin_lc(ft_strjoin_lc(name, ft_itoa_lc(index)), extension);
+	return (str);
 }

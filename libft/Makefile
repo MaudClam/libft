@@ -14,17 +14,24 @@ NAME =		libft.a
 
 SRCS =		ft_atoi.c \
 			ft_bzero.c \
+			ft_calloc_lc.c \
 			ft_errmsg.c \
+			ft_fi.c \
+			ft_indexname_lc.c \
 			ft_is_functions.c \
 			ft_is_functions1.c \
+			ft_itoa_lc.c \
 			ft_lc.c \
 			ft_lst_functions.c \
 			ft_lst_functions1.c \
+			ft_mem_functions.c \
 			ft_memcpy.c \
 			ft_put_functions.c \
 			ft_splitset_lc.c \
 			ft_strdup_lc.c \
+			ft_strjoin_lc.c \
 			ft_strlen.c \
+			ft_strtrim_lc.c
 
 OBJS =		$(SRCS:.c=.o)
 
