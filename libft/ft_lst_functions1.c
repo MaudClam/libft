@@ -102,3 +102,24 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (size);
 }
+
+/*
+** Allocates (with malloc(3)) and returns a new element.
+** The variable ’content’ is initialized with the value of the parameter
+** ’content’. The variable ’next’ is initialized to NULL.
+** Memory leaks monitored by the lc() function.
+** Return value: The new element.
+** Parametr: The content to create the new element with.
+*/
+t_list	*ft_lstnew_lc(void *content)
+{
+	t_list	*elem;
+
+	elem = lc(malloc(sizeof(t_list)));
+	if (elem)
+	{
+		elem->content = content;
+		elem->next = NULL;
+	}
+	return (elem);
+}

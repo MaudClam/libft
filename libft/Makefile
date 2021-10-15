@@ -28,10 +28,12 @@ SRCS =		ft_atoi.c \
 			ft_memcpy.c \
 			ft_put_functions.c \
 			ft_splitset_lc.c \
+			ft_str_functions.c \
+			ft_str_functions1.c \
 			ft_strdup_lc.c \
 			ft_strjoin_lc.c \
-			ft_strlen.c \
-			ft_strtrim_lc.c
+			ft_strtrim_lc.c \
+			ft_tolowerupper.c
 
 OBJS =		$(SRCS:.c=.o)
 

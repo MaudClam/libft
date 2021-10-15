@@ -15,6 +15,14 @@
 /*
 ** Following functions instead of ternary operator.
 */
+char	fic(char condition, char then, char otherwise_then)
+{
+	if (condition)
+		return (then);
+	else
+		return (otherwise_then);
+}
+
 int	fii(char condition, int then, int otherwise_then)
 {
 	if (condition)
