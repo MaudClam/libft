@@ -29,8 +29,8 @@ typedef struct s_lc		t_lc;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
-int		ft_errmsg(char *str, int err);
-int		ft_errexit(char *str, int err);
+int		ft_error_msg(char *str, int err);
+int		ft_error_exit(char *str, int err);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);

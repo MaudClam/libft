@@ -16,7 +16,7 @@ SRCS =		ft_arrsize.c \
 			ft_atoi.c \
 			ft_bzero.c \
 			ft_calloc_lc.c \
-			ft_errexit.c \
+			ft_error_functions.c \
 			ft_fi.c \
 			ft_indexname_lc.c \
 			ft_is_functions.c \

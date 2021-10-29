@@ -81,7 +81,7 @@ static void	*lc_newptr(t_lc *lc, void *ptr)
 		}
 		else
 		{
-			ft_errmsg("malloc() error in lc() function", errno);
+			ft_error_msg("malloc() error in lc() function", ENOMEM);
 			lc_freemem(lc, (uintptr_t)FREE_ALL);
 			free(ptr);
 			ptr = NULL;

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_errmsg.c                                        :+:      :+:    :+:   */
+/*   ft_error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mclam <mclam@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_errmsg(char *str, int err)
+int	ft_error_msg(char *str, int err)
 {
 	ft_putstr_fd("Error: ", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
@@ -22,7 +22,7 @@ int	ft_errmsg(char *str, int err)
 	return (err);
 }
 
-int	ft_errexit(char *str, int err)
+int	ft_error_exit(char *str, int err)
 {
 	ft_putstr_fd("Error: ", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);

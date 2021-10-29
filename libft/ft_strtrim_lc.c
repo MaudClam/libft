@@ -36,7 +36,7 @@ char	*ft_strtrim_lc(char const *s1, char const *set)
 	strtrim = lc(malloc(sizeof(char) * (right - left + 1)));
 	if (!strtrim)
 	{
-		ft_errmsg("malloc() error in ft_strtrim_lc() function", errno);
+		ft_error_msg("malloc() error in ft_strtrim_lc() function", ENOMEM);
 		errno = ENOMEM;
 		return (NULL);
 	}

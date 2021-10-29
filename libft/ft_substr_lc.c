@@ -29,7 +29,7 @@ char	*ft_substr_lc(const char *s, unsigned int start, size_t len)
 	substr = lc(malloc(sizeof(char) * (n + 1)));
 	if (!substr)
 	{
-		ft_errmsg("malloc() error in ft_substr() function", errno);
+		ft_error_msg("malloc() error in ft_substr() function", ENOMEM);
 		errno = ENOMEM;
 		return (NULL);
 	}

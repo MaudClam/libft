@@ -28,7 +28,7 @@ void	*ft_calloc_lc(size_t count, size_t size)
 	ptr = lc(malloc(count * size));
 	if (!ptr)
 	{
-		ft_errmsg("malloc() error in ft_calloc_lc() function", errno);
+		ft_error_msg("malloc() error in ft_calloc_lc() function", ENOMEM);
 		errno = ENOMEM;
 		return (NULL);
 	}

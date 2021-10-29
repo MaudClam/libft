@@ -24,7 +24,7 @@ int main(void)
 		ptr[i] = lc(malloc(i * k));
 		if (!ptr[i])
 		{
-			ft_errmsg("malloc[0] error in main()", errno);
+			ft_error_msg("malloc[0] error in main()", ENOMEM);
 			return (-1);
 		}
 		i++;
@@ -36,7 +36,7 @@ int main(void)
 		ptr[i] = lc(malloc(i * k));
 		if (!ptr[i])
 		{
-			ft_errmsg("malloc[0] error in main()", errno);
+			ft_error_msg("malloc[0] error in main()", ENOMEM);
 			return (-1);
 		}
 		i++;
