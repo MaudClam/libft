@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strdup_lc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mclam <mclam@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,18 +16,18 @@
 ** The function allocates sufficient memory for a copy of the string s1, does
 ** the copy, and returns a pointer to it. The ft_strndup() function copies
 ** at most n characters from the string s1 always NUL terminating the copied
-** string. Memory leaks monitored by the lc() function.
+** string. Memory leaks are NOT monitored by the lc() function.
 ** Return value: If insufficient memory is available, NULL is returned,
 ** issue an error message "malloc() error in ft_strdup_lc() function" with the
 ** value errno and errno is set to ENOMEM.
 */
-char	*ft_strdup_lc(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	size_t	n;
 	char	*s2;
 
 	n = ft_strlen(s1) + 1;
-	s2 = lc(malloc(sizeof(char) * n));
+	s2 = malloc(sizeof(char) * n);
 	if (!s2)
 	{
 		ft_errmsg("malloc() error in ft_strdup_lc() function", errno);

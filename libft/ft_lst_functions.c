@@ -77,3 +77,27 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 		free(lst);
 	}
 }
+
+t_list	*ft_lstcopy(t_list *lst, void *(*cmp)(void *), void (*del)(void *))
+{
+	t_list	*new_head;
+	t_list	*new;
+	
+	if (!lst || !del || !cmp)
+		return (NULL);
+	new_head = ft_lstnew(lst->content);
+	if (!new_head)
+		return (NULL);
+	while (lst->next)
+	{
+		lst = lst->next;
+		new = ft_lstnew(cmp(lst->content));
+		if (!new)
+		{
+			ft_lstclear(&new_head, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_head, new);
+	}
+	return (new_head);
+}

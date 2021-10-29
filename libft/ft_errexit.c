@@ -16,8 +16,18 @@ int	ft_errmsg(char *str, int err)
 {
 	ft_putstr_fd("Error: ", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putstr_fd(" (exit code: ", STDERR_FILENO);
+	ft_putstr_fd(" (error code: ", STDERR_FILENO);
 	ft_putnbr_fd(err, STDERR_FILENO);
 	ft_putstr_fd(")\n", STDERR_FILENO);
 	return (err);
+}
+
+int	ft_errexit(char *str, int err)
+{
+	ft_putstr_fd("Error: ", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(" (exit code: ", STDERR_FILENO);
+	ft_putnbr_fd(err, STDERR_FILENO);
+	ft_putstr_fd(")\n", STDERR_FILENO);
+	exit (err);
 }

@@ -12,10 +12,11 @@
 
 NAME =		libft.a
 
-SRCS =		ft_atoi.c \
+SRCS =		ft_arrsize.c \
+			ft_atoi.c \
 			ft_bzero.c \
 			ft_calloc_lc.c \
-			ft_errmsg.c \
+			ft_errexit.c \
 			ft_fi.c \
 			ft_indexname_lc.c \
 			ft_is_functions.c \
@@ -31,8 +32,11 @@ SRCS =		ft_atoi.c \
 			ft_str_functions.c \
 			ft_str_functions1.c \
 			ft_strdup_lc.c \
+			ft_strdup.c \
 			ft_strjoin_lc.c \
 			ft_strtrim_lc.c \
+			ft_substr_lc.c \
+			ft_substr.c \
 			ft_tolowerupper.c
 
 OBJS =		$(SRCS:.c=.o)

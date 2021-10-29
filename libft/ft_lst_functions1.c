@@ -121,5 +121,7 @@ t_list	*ft_lstnew_lc(void *content)
 		elem->content = content;
 		elem->next = NULL;
 	}
+	else
+		ft_errmsg("malloc() error in ft_lstnew_lc() function", errno);
 	return (elem);
 }
