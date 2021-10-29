@@ -14,11 +14,7 @@
 
 int	ft_error_msg(char *str, int err)
 {
-	ft_putstr_fd("Error: ", STDERR_FILENO);
-	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putstr_fd(" (error code: ", STDERR_FILENO);
-	ft_putnbr_fd(err, STDERR_FILENO);
-	ft_putstr_fd(")\n", STDERR_FILENO);
+	ft_putendl_fd(str, STDERR_FILENO);
 	return (err);
 }
 
