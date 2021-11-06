@@ -82,7 +82,7 @@ t_list	*ft_lstcopy(t_list *lst, void *(*cmp)(void *), void (*del)(void *))
 {
 	t_list	*new_head;
 	t_list	*new;
-	
+
 	if (!lst || !del || !cmp)
 		return (NULL);
 	new_head = ft_lstnew(lst->content);
