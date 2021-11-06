@@ -39,8 +39,10 @@
 static int	lc_freeone(t_lc *lc, int mode)
 {
 	t_lc	*l;
+	char	status;
 
 	l = lc;
+	status = 0;
 	while (l->next && l->next->next)
 		l = l->next;
 	if (l == lc && !l->next)
@@ -52,7 +54,10 @@ static int	lc_freeone(t_lc *lc, int mode)
 	free(l->next->ptr);
 	free(l->next);
 	l->next = NULL;
-	return (!(l->flag && mode));
+	if (!(l->flag && mode))
+		status = 1;
+	l->flag = 0;
+	return (status);
 }
 
 static void	lc_freemem(t_lc *lc, int mode)
@@ -113,6 +118,8 @@ void	*lc(void *ptr)
 		lc_freemem(&lc, (uintptr_t)FREE_TO_FIX);
 	else if (ptr == FIX_POINTER)
 		lc_fixptr(&lc);
+	else if (ptr == FROMFIX_TOBEGIN)
+		lc_fromfix_tobegin(&lc);
 	else
 		return (lc_newptr(&lc, ptr));
 	return (NULL);

@@ -19,10 +19,11 @@
 # include <stdint.h>
 # include <stdio.h>//FIXME
 
-# define FREE_TO_FIX	(void *)1
-# define FREE_ALL		NULL
-# define FIX_POINTER	(void *)-1
-# define U_INT			unsigned int
+# define FREE_TO_FIX		(void *)1
+# define FROMFIX_TOBEGIN	(void *)2
+# define FREE_ALL			NULL
+# define FIX_POINTER		(void *)-1
+# define U_INT				unsigned int
 
 typedef struct s_list	t_list;
 typedef struct s_lc		t_lc;
@@ -86,6 +87,7 @@ struct s_lc
 };
 
 void	*lc(void *ptr);
+void	lc_fromfix_tobegin(t_lc *begin);
 char	*ft_itoa_lc(int n);
 char	**ft_splitset_lc(char const *s, char const *set);
 char	*ft_strdup_lc(const char *s1);
