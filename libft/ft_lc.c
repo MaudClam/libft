@@ -6,11 +6,15 @@
 /*   By: mclam <mclam@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 17:10:30 by mclam             #+#    #+#             */
-/*   Updated: 2021/09/29 17:10:30 by mclam            ###   ########.fr       */
+/*   Updated: 2021/11/07 02:37:07 by mclam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+t_lc	*lc_newcell_add(t_lc **lc);
+void	lc_mark_ptr(t_lc *lc, unsigned int mark);
+void	lc_mv_fromark_tobegin(t_lc **lc);
 
 /*
 ** Function void *lc(void *ptr) takes a pointer created with malloc(3),
@@ -18,12 +22,12 @@
 ** Returned value: the received pointer. NULL if the parameter are NULL,
 ** (void *)1, (void *)-1, or if the memory allocation for an element
 ** of the pointer table is denied.
-** Parameter: pointer or NULL or (void *)1 or (void *)-1.
+** Parameter: pointer or NULL or (void *)1 or (void *)2.
 ** Function actions:
 ** 1.If the parameter is a pointer, it is written to the pointer table.
 ** 2.If the parameter is NULL, all memory pointed to by pointers from
 **   the table is freed along with the memory occupied by the table.
-** 3.If the parameter is (void *)-1, a flag is set in the table of pointers
+** 3.If the parameter is (void *)2, a flag is set in the table of pointers
 **   opposite the last pointer.
 ** 4.If the parameter is (void *)1, the memory will be freed
 **   only up to the nearest pointer with a flag in the reverse order
@@ -36,90 +40,87 @@
 **   In this case, the memory pointed to by the pointer passed as a parameter
 **   will also be freed.
 */
-static int	lc_freeone(t_lc *lc, int mode)
+static int	lc_free_firstptr(t_lc **lc, unsigned int mode)
 {
-	t_lc	*l;
-	char	status;
-
-	l = lc;
-	status = 0;
-	while (l->next && l->next->next)
-		l = l->next;
-	if (l == lc && !l->next)
+	if (!(mode && (*lc)->flag))
 	{
-		free(l->ptr);
-		l->ptr = NULL;
-		return (0);
+		free((*lc)->ptr);
+		(*lc)->ptr = NULL;
+		free(*lc);
+		*lc = NULL;
 	}
-	free(l->next->ptr);
-	free(l->next);
-	l->next = NULL;
-	if (!(l->flag && mode))
-		status = 1;
-	l->flag = 0;
+	return (FALSE);
+}
+
+static int	lc_freeone(t_lc **lc, unsigned int mode)
+{
+	int		status;
+	t_lc	*tmp;
+
+	status = FALSE;
+	if (*lc != NULL && (*lc)->next == NULL)
+		return (lc_free_firstptr(lc, mode));
+	if (*lc != NULL && (*lc)->next != NULL)
+	{
+		tmp = *lc;
+		while (tmp->next->next != NULL)
+			tmp = tmp->next;
+		if (!(mode && tmp->next->flag))
+		{
+			free(tmp->next->ptr);
+			tmp->next->ptr = NULL;
+			free(tmp->next);
+			tmp->next = NULL;
+		}
+		if (!(mode && (tmp->flag || (tmp->next && tmp->next->flag))))
+			status = TRUE;
+		if (tmp->flag != (uintptr_t)HARDMARK_POINTER)
+			tmp->flag = 0;
+	}
 	return (status);
 }
 
-static void	lc_freemem(t_lc *lc, int mode)
+static void	lc_freemem(t_lc **lc, unsigned int mode)
 {
 	int	freeone_result;
 
 	freeone_result = 1;
-	while (freeone_result)
+	while (freeone_result == TRUE)
 		freeone_result = lc_freeone(lc, mode);
 }
 
-static void	*lc_newptr(t_lc *lc, void *ptr)
+static void	*lc_newptr(t_lc **lc, void *ptr)
 {
-	t_lc	*l;
+	t_lc	*tmp;
 
-	l = lc;
-	if (l->ptr)
-	{
-		while (l->next)
-			l = l->next;
-		l->next = malloc(sizeof(t_lc));
-		if (l->next)
-		{
-			ft_bzero(l->next, sizeof(t_lc));
-			l->next->ptr = ptr;
-		}
-		else
-		{
-			ft_error_msg("malloc() error in lc() function", ENOMEM);
-			lc_freemem(lc, (uintptr_t)FREE_ALL);
-			free(ptr);
-			ptr = NULL;
-			errno = ENOMEM;
-		}
-	}
+	tmp = lc_newcell_add(lc);
+	if (tmp != NULL)
+		tmp->ptr = ptr;
 	else
-		l->ptr = ptr;
+	{
+		ft_error_msg("malloc() error in lc() function", ENOMEM);
+		lc_freemem(lc, (uintptr_t)FREE_ALL);
+		free(ptr);
+		ptr = NULL;
+		errno = ENOMEM;
+	}
 	return (ptr);
-}
-
-static void	lc_fixptr(t_lc *lc)
-{
-	t_lc	*l;
-
-	l = lc;
-	while (l->next)
-		l = l->next;
-	l->flag = 1;
 }
 
 void	*lc(void *ptr)
 {
-	static t_lc	lc;
+	static t_lc	*lc;
 
 	if (ptr == FREE_ALL)
 		lc_freemem(&lc, (uintptr_t)FREE_ALL);
-	else if (ptr == FREE_TO_FIX)
-		lc_freemem(&lc, (uintptr_t)FREE_TO_FIX);
-	else if (ptr == FIX_POINTER)
-		lc_fixptr(&lc);
-	else if (ptr == FROMFIX_TOBEGIN)
-		lc_fromfix_tobegin(&lc);
+	else if (ptr == FREE_TO_MARK)
+		lc_freemem(&lc, (uintptr_t)FREE_TO_MARK);
+	else if (ptr == MARK_POINTER)
+		lc_mark_ptr(lc, (uintptr_t)MARK_POINTER);
+	else if (ptr == HARDMARK_POINTER)
+		lc_mark_ptr(lc, (uintptr_t)HARDMARK_POINTER);
+	else if (ptr == MV_FROMARK_TOBEGIN)
+		lc_mv_fromark_tobegin(&lc);
 	else
 		return (lc_newptr(&lc, ptr));
 	return (NULL);

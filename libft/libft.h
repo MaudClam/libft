@@ -6,7 +6,7 @@
 /*   By: mclam <mclam@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 01:30:59 by mclam             #+#    #+#             */
-/*   Updated: 2021/09/19 01:30:59 by mclam            ###   ########.fr       */
+/*   Updated: 2021/11/07 01:25:29 by mclam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@
 # include <stdint.h>
 # include <stdio.h>//FIXME
 
-# define FREE_TO_FIX		(void *)1
-# define FROMFIX_TOBEGIN	(void *)2
+# define TRUE				1
+# define FALSE				0
+# define MARK_POINTER		(void *)1
+# define FREE_TO_MARK		(void *)2
+# define HARDMARK_POINTER	(void *)3
+# define MV_FROMARK_TOBEGIN	(void *)4
 # define FREE_ALL			NULL
-# define FIX_POINTER		(void *)-1
 # define U_INT				unsigned int
 
 typedef struct s_list	t_list;
@@ -63,10 +66,10 @@ char	*ft_substr(const char *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 
-struct					s_list
+struct				s_list
 {
-	void				*content;
-	struct s_list		*next;
+	void			*content;
+	struct s_list	*next;
 };
 
 void	ft_lstadd_back(t_list **lst, t_list *new);
@@ -81,13 +84,12 @@ int		ft_lstsize(t_list *lst);
 
 struct s_lc
 {
-	char				flag;
-	void				*ptr;
-	struct s_lc			*next;
+	unsigned char	flag;
+	void			*ptr;
+	struct s_lc		*next;
 };
 
 void	*lc(void *ptr);
-void	lc_fromfix_tobegin(t_lc *begin);
 char	*ft_itoa_lc(int n);
 char	**ft_splitset_lc(char const *s, char const *set);
 char	*ft_strdup_lc(const char *s1);
