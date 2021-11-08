@@ -43,9 +43,13 @@ t_lc	*lc_newcell_add(t_lc **lc)
 
 void	lc_mark_ptr(t_lc *lc, unsigned int mark)
 {
-	while (lc->next)
-		lc = lc->next;
-	lc->flag = mark;
+	if (lc != NULL)
+	{
+		while (lc->next != NULL)
+			lc = lc->next;
+		if (lc->flag != (uintptr_t)PUT_HARDBARRIER)
+			lc->flag = mark;
+	}
 }
 
 void	lc_mv_fromark_tobegin(t_lc **lc)
@@ -68,7 +72,7 @@ void	lc_mv_fromark_tobegin(t_lc **lc)
 		*lc = lastmark->next;
 		end->next = begin;
 		lastmark->next = NULL;
-		if (lastmark->flag != (uintptr_t)HARDMARK_POINTER)
+		if (lastmark->flag != (uintptr_t)PUT_HARDBARRIER)
 			lastmark->flag = 0;
 	}
 }

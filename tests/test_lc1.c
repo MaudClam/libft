@@ -14,7 +14,7 @@
 
 int main(void)
 {
-	static void	*ptr[7];
+	static void	*ptr[700];
 	size_t		k = 1000000;
 	int			i;
 	
@@ -23,20 +23,19 @@ int main(void)
 	i = 0;
 	while (i < 3)
 		ptr[i++] = lc(malloc(k));
-	lc(HARDMARK_POINTER);
+	lc(PUT_HARDBARRIER);
 	
-	i = 0;
-	while (i < 3)
+	i = 3;
+	while (i < 700)
 		ptr[i++] = lc(malloc(k));
-	lc(MV_FROMARK_TOBEGIN);
+//	lc(MOVE_PTRS_TO_BEGIN);
 
-	i = 0;
-	while (i < 3)
-		ptr[i++] = lc(malloc(k));
-	lc(FREE_TO_MARK);
-
-	lc(FREE_TO_MARK);
-	lc(FREE_TO_MARK);
+//	i = 0;
+//	while (i < 3)
+//		ptr[i++] = lc(malloc(k));
+	lc(FREE_TO_BARRIER);
+	lc(FREE_TO_BARRIER);
+	lc(FREE_TO_BARRIER);
 
 	lc(FREE_ALL);
 	sleep (1);

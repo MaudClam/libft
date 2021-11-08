@@ -21,10 +21,10 @@
 
 # define TRUE				1
 # define FALSE				0
-# define MARK_POINTER		(void *)1
-# define FREE_TO_MARK		(void *)2
-# define HARDMARK_POINTER	(void *)3
-# define MV_FROMARK_TOBEGIN	(void *)4
+# define PUT_BARRIER		(void *)1
+# define FREE_TO_BARRIER	(void *)2
+# define PUT_HARDBARRIER	(void *)3
+# define MOVE_PTRS_TO_BEGIN	(void *)4
 # define FREE_ALL			NULL
 # define U_INT				unsigned int
 

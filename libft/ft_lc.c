@@ -74,7 +74,7 @@ static int	lc_freeone(t_lc **lc, unsigned int mode)
 		}
 		if (!(mode && (tmp->flag || (tmp->next && tmp->next->flag))))
 			status = TRUE;
-		if (tmp->flag != (uintptr_t)HARDMARK_POINTER)
+		if (tmp->flag != (uintptr_t)PUT_HARDBARRIER)
 			tmp->flag = 0;
 	}
 	return (status);
@@ -98,7 +98,7 @@ static void	*lc_newptr(t_lc **lc, void *ptr)
 		tmp->ptr = ptr;
 	else
 	{
-		ft_error_msg("malloc() error in lc() function", ENOMEM);
+		ft_error_msg("lbft: malloc() error in lc() function", ENOMEM);
 		lc_freemem(lc, (uintptr_t)FREE_ALL);
 		free(ptr);
 		ptr = NULL;
@@ -113,13 +113,13 @@ void	*lc(void *ptr)
 
 	if (ptr == FREE_ALL)
 		lc_freemem(&lc, (uintptr_t)FREE_ALL);
-	else if (ptr == FREE_TO_MARK)
-		lc_freemem(&lc, (uintptr_t)FREE_TO_MARK);
-	else if (ptr == MARK_POINTER)
-		lc_mark_ptr(lc, (uintptr_t)MARK_POINTER);
-	else if (ptr == HARDMARK_POINTER)
-		lc_mark_ptr(lc, (uintptr_t)HARDMARK_POINTER);
-	else if (ptr == MV_FROMARK_TOBEGIN)
+	else if (ptr == FREE_TO_BARRIER)
+		lc_freemem(&lc, (uintptr_t)FREE_TO_BARRIER);
+	else if (ptr == PUT_BARRIER)
+		lc_mark_ptr(lc, (uintptr_t)PUT_BARRIER);
+	else if (ptr == PUT_HARDBARRIER)
+		lc_mark_ptr(lc, (uintptr_t)PUT_HARDBARRIER);
+	else if (ptr == MOVE_PTRS_TO_BEGIN)
 		lc_mv_fromark_tobegin(&lc);
 	else
 		return (lc_newptr(&lc, ptr));

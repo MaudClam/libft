@@ -39,7 +39,7 @@ char	*ft_strjoin_lc(char const *s1, char const *s2)
 	str = lc(malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1)));
 	if (!str)
 	{
-		ft_error_msg("malloc() error in ft_strjoin_lc() function", ENOMEM);
+		ft_error_msg("lbft: malloc() error in ft_strjoin_lc() function", ENOMEM);
 		errno = ENOMEM;
 		return (NULL);
 	}

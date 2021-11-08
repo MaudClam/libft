@@ -24,24 +24,24 @@ int main(void)
 		ptr[i] = lc(malloc(i * k));
 		if (!ptr[i])
 		{
-			ft_error_msg("malloc[0] error in main()", ENOMEM);
+			ft_error_msg("lbft: malloc[0] error in main()", ENOMEM);
 			return (-1);
 		}
 		i++;
 	}
-	lc(FIX_POINTER);
+	lc(PUT_BARRIER);
 	i = 0;
 	while (i < k)
 	{
 		ptr[i] = lc(malloc(i * k));
 		if (!ptr[i])
 		{
-			ft_error_msg("malloc[0] error in main()", ENOMEM);
+			ft_error_msg("lbft: malloc[0] error in main()", ENOMEM);
 			return (-1);
 		}
 		i++;
 	}
-	lc(FREE_TO_FIX);
+	lc(FREE_TO_BARRIER);
 	lc(FREE_ALL);
 	sleep (1);
 	exit(0);
