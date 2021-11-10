@@ -95,6 +95,9 @@ char	**ft_splitset_lc(char const *s, char const *set);
 char	*ft_strdup_lc(const char *s1);
 void	*ft_calloc_lc(size_t count, size_t size);
 char	*ft_strjoin_lc(char const *s1, char const *s2);
+char	*ft_strjoin3_lc(char const *s1, char const *s2, char const *s3);
+char	*ft_strjoin4_lc(char const *s1, char const *s2, char const *s3, \
+																char const *s4);
 char	*ft_strtrim_lc(char const *s1, char const *set);
 char	*ft_indexname_lc(char const *name, int index, char const *extension);
 t_list	*ft_lstnew_lc(void *content);

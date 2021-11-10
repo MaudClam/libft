@@ -49,3 +49,36 @@ char	*ft_strjoin_lc(char const *s1, char const *s2)
 		str_j_copy(str, s2, j);
 	return (str);
 }
+
+char	*ft_strjoin3_lc(char const *s1, char const *s2, char const *s3)
+{
+	char	*str;
+
+	str = ft_strjoin_lc(s1, s2);
+	if (str != NULL)
+	{
+		str = ft_strjoin_lc(str, s3);
+		if (str != NULL)
+			return (str);
+	}
+	return (NULL);
+}
+
+char	*ft_strjoin4_lc(char const *s1, char const *s2, char const *s3, \
+																char const *s4)
+{
+	char	*str;
+
+	str = ft_strjoin_lc(s1, s2);
+	if (str != NULL)
+	{
+		str = ft_strjoin_lc(str, s3);
+		if (str != NULL)
+		{
+			str = ft_strjoin_lc(str, s4);
+			if (str != NULL)
+				return (str);
+		}
+	}
+	return (NULL);
+}
