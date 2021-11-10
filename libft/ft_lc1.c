@@ -15,7 +15,7 @@
 t_lc	*lc_newcell_add(t_lc **lc)
 {
 	t_lc	*tmp;
-	
+
 	tmp = NULL;
 	if (*lc == NULL)
 	{
@@ -61,7 +61,7 @@ void	lc_mv_fromark_tobegin(t_lc **lc)
 	begin = *lc;
 	end = begin;
 	lastmark = NULL;
-	while (end->next != NULL)
+	while (*lc != NULL && end->next != NULL)
 	{
 		if (end->flag > 0)
 			lastmark = end;
@@ -75,4 +75,7 @@ void	lc_mv_fromark_tobegin(t_lc **lc)
 		if (lastmark->flag != (uintptr_t)PUT_HARDBARRIER)
 			lastmark->flag = 0;
 	}
+	else
+		if (end != NULL && end->flag != (uintptr_t)PUT_HARDBARRIER)
+			end->flag = 0;
 }

@@ -21,10 +21,12 @@ int main(void)
 	sleep (1);
 
 	i = 0;
-	while (i < 3)
+	while (i < 2)
 		ptr[i++] = lc(malloc(k));
-	lc(PUT_HARDBARRIER);
-	
+	lc(PUT_BARRIER);
+//	ptr[i++] = lc(malloc(k));
+	lc(MOVE_PTRS_TO_BEGIN);
+
 	i = 3;
 	while (i < 700)
 		ptr[i++] = lc(malloc(k));
